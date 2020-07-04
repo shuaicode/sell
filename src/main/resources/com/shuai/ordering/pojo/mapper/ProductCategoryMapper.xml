@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shuai.ordering.pojo.mapper.ProductCategoryMapper">
+
+    <!-- 数据表列字段与pojo类属性映射关系 type:指定将查询的结果封装到哪个类pojo对象中 id:指定一个唯一表示resultMap的值 -->
+    <resultMap type="com.shuai.ordering.pojo.ProductCategory" id="BaseResultMap">
+        <id column="category_id" property="categoryId" jdbcType="INTEGER"/>
+        <result column="category_name" property="categoryName" jdbcType="VARCHAR"/>
+        <result column="category_type" property="categoryType" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 1.查询所有员工信息 id值为对应接口中方法的名字 resultMap:指定为resultMap标签的id值 -->
+    <select id="selectByCategoryType" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select category_id, category_name, category_type
+        from product_category
+        where category_type = #{category_type, jdbcType=INTEGER}
+    </select>
+
+</mapper>
